@@ -1,0 +1,91 @@
+data
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+wheels/
+sdist/
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pyenv
+.python-version
+
+# Virtualenv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm and VSCode specific files
+.idea/
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# dotenv environment variables file
+.env
+
+# Ignore Docker-related files
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Local development files
+*.local
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Ignore Mac OS generated files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Folder settings
+.Spotlight-V100
+.Trashes
+
+# Ignoring persistent vector store and docstore folders
+discord/data/chroma_db/
+discord/data/doc_store/
+
+# Ignore GCP and Docker credentials
+*.json
+
+# Ignore Kubernetes deployment artifacts
+*.yaml
+
+# Ignore the Makefile if you have local overrides
+Makefile.local
+
+# Ignore Python compiled files and caches
+__pycache__/
+*.pyc
