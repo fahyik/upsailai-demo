@@ -3,12 +3,13 @@ import discord
 from rag.chain import build_openai_chain
 
 from .config import TOKEN, OPENAI_TOKEN, PERSIST_DIR, DOCSTORE_PATH
+from .healthcheck import HealthCheckDiscordClient
 
 
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = discord.Client(intents=intents)
+client = HealthCheckDiscordClient(intents=intents)
 
 rag_chain = None
 
