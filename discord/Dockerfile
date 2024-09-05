@@ -21,5 +21,7 @@ ENV PERSIST_DIR=/app/persisted_vector_store
 ENV DOCSTORE_PATH=/app/docstore
 ENV PYTHONPATH=/app
 
+EXPOSE 8000
+
 # Run the application
 CMD ["python", "-m", "bot.main"]
