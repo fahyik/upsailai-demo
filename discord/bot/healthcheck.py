@@ -1,23 +1,23 @@
 import http.server
 import socketserver
 import threading
-import discord
+from discord.ext import commands
 
 
 class _ClientContext:
     """A simple class to keep context for the client handler function"""
 
-    def __init__(self, client: discord.Client, bot_max_latency: float):
-        self.client = client
+    def __init__(self, bot: commands.Bot, bot_max_latency: float):
+        self.bot = bot
         self.bot_max_latency = bot_max_latency
 
     def health_status(self):
         """Returns the health status of the Discord bot client"""
         if (
-            self.client.latency > self.bot_max_latency  # Latency too high
-            or self.client.user is None  # Not logged in
-            or not self.client.is_ready()  # Client’s internal cache not ready
-            or self.client.is_closed()  # The websocket connection is closed
+            self.bot.latency > self.bot_max_latency  # Latency too high
+            or self.bot.user is None  # Not logged in
+            or not self.bot.is_ready()  # Client’s internal cache not ready
+            or self.bot.is_closed()  # The websocket connection is closed
         ):
             return "unhealthy", 503  # Return 503 for unhealthy
         return "healthy", 200  # Return 200 for healthy
@@ -43,7 +43,7 @@ class HealthCheckHandler(http.server.BaseHTTPRequestHandler):
         return
 
 
-def start_http_health_check(client: discord.Client, port: int = 8080, bot_max_latency: float = 0.5):
+def start_http_health_check(bot: commands.Bot, port: int = 8080, bot_max_latency: float = 30):
     """Starts the HTTP health check server.
 
     Args:
@@ -52,7 +52,7 @@ def start_http_health_check(client: discord.Client, port: int = 8080, bot_max_la
         bot_max_latency: The maximum acceptable latency (in seconds) for the bot's
             connection to Discord.
     """
-    ctx = _ClientContext(client, bot_max_latency)
+    ctx = _ClientContext(bot, bot_max_latency)
 
     # Define the handler with the context
     handler = HealthCheckHandler
@@ -66,9 +66,3 @@ def start_http_health_check(client: discord.Client, port: int = 8080, bot_max_la
 
     thread = threading.Thread(target=run_server)
     thread.start()
-
-
-class HealthCheckDiscordClient(discord.Client):
-    async def setup_hook(self):
-        # Start the HTTP health check server when the bot starts
-        start_http_health_check(self, port=8000, bot_max_latency=0.5)

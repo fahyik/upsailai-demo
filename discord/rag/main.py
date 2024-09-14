@@ -1,11 +1,40 @@
-from rag.chain import build_openai_chain
+import base64
+import json
+import os
+
+from langchain_openai import ChatOpenAI
+
+from rag.chain import load_retriever, build_stylist_chain
+
+os.environ["OPENAI_API_KEY"] = "sk-proj-bPZqEs92C38iN9sUNTWBT3BlbkFJARac9Feph9oJlZLe4JUt"
 
 
 if __name__ == "__main__":
-    rag = build_openai_chain(
-        "/Users/szhang/workspace/personal/upsail-demo/discord/data/chroma_db",
-        "/Users/szhang/workspace/personal/upsail-demo/discord/data/doc_store",
-        "sk-proj-bPZqEs92C38iN9sUNTWBT3BlbkFJARac9Feph9oJlZLe4JUt",
+    llm_4o = ChatOpenAI(model="gpt-4o")
+    stylist_chain = build_stylist_chain(llm_4o)
+    retriever = load_retriever(
+        persist_directory="/Users/szhang/workspace/personal/upsail-demo/discord/data/chroma_db",
+        docstore_path="/Users/szhang/workspace/personal/upsail-demo/discord/data/doc_store"
     )
-    print(rag.invoke("What's the best blue skirt for a wedding ?"))
+
+    with open('/Users/szhang/workspace/personal/upsail-demo/clothe.jpg', 'rb') as fh:
+        base64_encoded_image = base64.b64encode(fh.read()).decode('utf-8')
+    image_data = "data:image/jpeg;base64,%s" % base64_encoded_image
+
+    style_suggestions = stylist_chain.invoke({"image_url": image_data})
+    products = {}
+    for query in style_suggestions['clothes']:
+        docs = retriever.invoke(query)
+        for doc in docs:
+            product = json.loads(doc.page_content)
+            products[product['url']] = product
+
+    len(products)
+
+    # rag = build_openai_chain(
+    #     "/Users/szhang/workspace/personal/upsail-demo/discord/data/chroma_db",
+    #     "/Users/szhang/workspace/personal/upsail-demo/discord/data/doc_store",
+    #     "sk-proj-bPZqEs92C38iN9sUNTWBT3BlbkFJARac9Feph9oJlZLe4JUt",
+    # )
+    # print(rag.invoke("White high-waisted trousers with a straight cut for a clean contrast"))
 

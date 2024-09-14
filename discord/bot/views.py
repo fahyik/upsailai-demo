@@ -1,23 +1,52 @@
+import base64
+import io
+
 import discord
-from discord.ui import View, Button
+from discord.ui import View
 
 
-class InitialView(View):
-    def __init__(self):
-        super().__init__()
+class Carousel(View):
+    def __init__(self, products, thread):
+        super().__init__(timeout=180)  # Timeout after 3 minutes of inactivity
+        self.products = products
+        self.current = 0
+        self.thread = thread
+        self.message = None  # Will hold the message object after sending
 
-    @discord.ui.button(label="Complete the look", style=discord.ButtonStyle.primary, custom_id="complete_look")
-    async def complete_look(self, button: discord.ui.Button, interaction: discord.Interaction):
-        embeds = [
-            discord.Embed(title=fit['name'], description=fit['description']).set_image(url=fit["image"])
-            for fit in fits
-        ]
-        await interaction.response.send_message("Here are the complete clothes:", view=StyleView(fits, "complete"), embeds=embeds)
+    async def update_embed(self, interaction=None):
+        product = self.products[self.current]
 
-    @discord.ui.button(label="Find similar clothes", style=discord.ButtonStyle.red, custom_id="find_similar")
-    async def find_similar(self, button: discord.ui.Button, interaction: discord.Interaction):
-        embeds = [
-            discord.Embed(title=similar['name'], description=similar['description']).set_image(url=similar["image"])
-            for similar in similars
-        ]
-        await interaction.response.send_message("Here are similar clothes:", view=StyleView(similars, "similar"), embeds=embeds)
+        # Decode the base64 image
+        image_data = base64.b64decode(product['image_base64'])
+        image_file = discord.File(io.BytesIO(image_data), filename='image.png')
+
+        embed = discord.Embed(
+            title=product['name'],
+            description=product['description']
+        )
+        embed.set_image(url=f'attachment://image.png')
+        embed.set_footer(text=f"Product {self.current + 1}/{len(self.products)}")
+
+        if interaction is None:
+            # Initial message send
+            self.message = await self.thread.send(embed=embed, file=image_file, view=self)
+        else:
+            # Edit existing message
+            await interaction.message.edit(embed=embed, attachments=[image_file], view=self)
+            await interaction.response.defer()
+
+    @discord.ui.button(label='◀️', style=discord.ButtonStyle.primary)
+    async def previous(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if self.current > 0:
+            self.current -= 1
+            await self.update_embed(interaction)
+        else:
+            await interaction.response.defer()  # Do nothing if at the first product
+
+    @discord.ui.button(label='▶️', style=discord.ButtonStyle.primary)
+    async def next(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if self.current < len(self.products) - 1:
+            self.current += 1
+            await self.update_embed(interaction)
+        else:
+            await interaction.response.defer()  # Do nothing if at the last product
