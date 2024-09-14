@@ -67,7 +67,7 @@ async def on_message(message):
         return
 
     # Check if the message is in a thread created by the bot
-    if isinstance(message.channel, discord.Thread) and message.channel.owner == bot.user and message.content:
+    if isinstance(message.channel, discord.Thread) and message.channel.owner == bot.user:
         # Check if the message has attachments
         if message.attachments:
             for attachment in message.attachments:
