@@ -72,7 +72,7 @@ def build_stylist_chain(llm):
             3.	Provide a concise explanation of the overall style that the recommended outfit would create, including the reason for choosing the matching clothes.
 
         This version emphasizes clarity and structure for easy processing in your RAG system.
-        
+
         Answer the user query.
         {format_instructions}
     """

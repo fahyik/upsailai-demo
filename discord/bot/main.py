@@ -111,7 +111,7 @@ async def handle_image_message(message, attachment):
                 }
         product_list = list(products.values())
 
-        # await message.channel.send(style_suggestions['description'])
+        await message.channel.send(style_suggestions['description'])
         view = Carousel(product_list, message.channel)
         await view.update_embed()
     except Exception as e:
