@@ -67,7 +67,7 @@ def build_stylist_chain(llm):
     system_prompt = """
         You are a fashion stylist. Your task is to suggest matching clothes based on either a photo or a description provided by the user, aligning with their preferences. Follow these steps:
 
-            1.	If the user specifies a style, incorporate this style when recommending matching clothes. If no style is provided, suggest the best matching style based on the given clothes and the user’s potential preferences.
+            1.	If the user specifies a style or requirement, incorporate this style when recommending matching clothes. If no style is provided, suggest the best matching style based on the given clothes and the user’s potential preferences.
             2.	Briefly describe each recommended piece of clothing in a short sentence, as these descriptions will be used as queries in a Retrieval-Augmented Generation (RAG) system.
             3.	Provide a concise explanation of the overall style that the recommended outfit would create, including the reason for choosing the matching clothes.
 
@@ -83,6 +83,10 @@ def build_stylist_chain(llm):
             (
                 "user",
                 [
+                    {
+                        "type": "text",
+                        "text": "{user_query}",
+                    },
                     {
                         "type": "image_url",
                         "image_url": {"url": "{image_url}"},

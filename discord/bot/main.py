@@ -96,24 +96,35 @@ async def handle_image_message(message, attachment):
 
         await message.channel.send("Just a moment! Tomo is searching for the perfect product match for you.")
 
-        style_suggestions = stylist_chain.invoke({"image_url": formatted_message})
+        user_query = message.content.strip()
+        if len(user_query) < 2:
+            user_query = "Please suggest the best matching style based on the given clothes"
+
+        style_suggestions = stylist_chain.invoke({"image_url": formatted_message, "user_query": user_query})
         products = {}
+
         for query in style_suggestions['clothes']:
             docs = retriever.invoke(query)
             for doc in docs:
                 product = json.loads(doc.page_content)
                 if len(product['image_encodings']) == 0:
                     continue
-                products[product['url']] = {
+                if product['category'] not in products:
+                    products[product['category']] = {}
+                products[product['category']][product['url']] = {
                     'name': product['title'],
                     'description': product['description'],
                     'image_base64': product['image_encodings'][-1],  # Replace with actual base64 string
+                    'product_url': product['url'],
                 }
-        product_list = list(products.values())
 
         await message.channel.send(style_suggestions['description'])
-        view = Carousel(product_list, message.channel)
-        await view.update_embed()
+
+        for category, selected_products in products.items():
+            await message.channel.send("Here is some suggestion of %s:" % category.lower())
+            product_list = list(selected_products.values())
+            view = Carousel(product_list, message.channel)
+            await view.update_embed()
     except Exception as e:
         await message.channel.send(f"An error occurred: {e}")
         raise e

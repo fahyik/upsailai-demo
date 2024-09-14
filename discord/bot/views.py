@@ -22,7 +22,9 @@ class Carousel(View):
 
         embed = discord.Embed(
             title=product['name'],
-            description=product['description']
+            # description=product['description'],
+            color=discord.Color.blue(),
+            url=product['product_url'],
         )
         embed.set_image(url=f'attachment://image.png')
         embed.set_footer(text=f"Product {self.current + 1}/{len(self.products)}")
