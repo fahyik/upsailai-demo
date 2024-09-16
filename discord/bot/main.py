@@ -52,7 +52,7 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
 
 
-@bot.tree.command(name="tomotest", description="Find the perfect product match")
+@bot.tree.command(name="tomo", description="Find the perfect product match")
 async def match_command(interaction: discord.Interaction):
     # Create a thread from the interaction message
     thread = await interaction.channel.create_thread(
