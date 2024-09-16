@@ -19,17 +19,20 @@ from .util import product_to_string
 
 
 class StyleSuggestion(BaseModel):
+    user_clothes: str = Field(description="A description of user's clothes as a Stylist")
     style: str = Field(description="A name of suggested style")
     description: str = Field(description="explanation of the style and why the suggested clothes match")
     target_cloth: str = Field(description="The description of the cloth provided by user.")
     clothes: List[str] = Field(description="list of short description of the clothes to be used as a query")
 
-
 class ProductSuggestion(BaseModel):
     name: str = Field(description="The name of the product")
     url: str = Field(description="the url of the product")
-    description: str = Field(description="Why this product can match user's clothes")
+    description: str = Field(description="Short description to explain why this product is selected to answer user's query")
 
+
+class ProductSuggestions(BaseModel):
+    products: List[ProductSuggestion] =  Field(description="List of product suggested according to context and user's question")
 
 
 def load_retriever(persist_directory, docstore_path):
@@ -61,7 +64,7 @@ def format_docs(docs):
     return "\n\n".join(product_strs)
 
 
-def build_stylist_chain(llm):
+def build_stylist_chain(llm, with_image=True):
     style_output_parser = JsonOutputParser(pydantic_object=StyleSuggestion)
 
     system_prompt = """
@@ -77,21 +80,24 @@ def build_stylist_chain(llm):
         {format_instructions}
     """
 
+    messages = [
+        {
+            "type": "text",
+            "text": "{user_query}",
+        },
+    ]
+    if with_image:
+        messages.append(        {
+            "type": "image_url",
+            "image_url": {"url": "{image_url}"},
+        })
+
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", system_prompt),
             (
                 "user",
-                [
-                    {
-                        "type": "text",
-                        "text": "{user_query}",
-                    },
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": "{image_url}"},
-                    }
-                ],
+                messages,
             ),
         ]
     ).partial(format_instructions = style_output_parser.get_format_instructions())
@@ -100,6 +106,47 @@ def build_stylist_chain(llm):
         prompt
         | llm
         | style_output_parser
+    )
+
+    return chain
+
+
+def build_sale_assistant_chain(llm):
+    output_parser = JsonOutputParser(pydantic_object=ProductSuggestions)
+
+    template = """
+        You are a sales assistant for Vanessa-Bruno.
+
+        Your task is to answer the user’s question and offer a product recommendation based on the
+        provided context, which includes details about selected products from a 
+        RAG (Retrieval-Augmented Generation) system that the customer may be interested in.
+
+        Instructions:
+
+            1.	If you are unsure of the answer, simply state that you don’t know—avoid guessing.
+            2.	Select up to 3 best-matching clothing items in each category.
+            3.	Keep your reply concise.
+
+        {format_instructions}
+
+        Context:
+        {context}
+
+        Question: {question}
+
+        Helpful Answer:
+    """
+
+    prompt = PromptTemplate.from_template(
+        template
+    ).partial(
+        format_instructions = output_parser.get_format_instructions()
+    )
+
+    chain = (
+        prompt
+        | llm
+        | output_parser
     )
 
     return chain
