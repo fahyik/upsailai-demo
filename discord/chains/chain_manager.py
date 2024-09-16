@@ -1,7 +1,5 @@
-# app/chains/chain_manager.py
-
-import json
 import os
+import json
 from langchain_openai import ChatOpenAI
 
 from chains.retriever import load_retriever
@@ -41,7 +39,6 @@ class ChainManager:
         return retrieved_products, retrieved_docs
 
     def build_question(self, style_suggestions, user_query):
-        # Join the clothes suggestions outside the f-string
         clothes_suggestions = '\n'.join(style_suggestions['clothes'])
         question = f"""
         A customer is seeking a product recommendation for {style_suggestions['user_clothes']} with the following requirement: {user_query}.
@@ -63,3 +60,4 @@ class ChainManager:
             category = retrieved_product['category']
             products.setdefault(category, {})[retrieved_product['product_url']] = retrieved_product
         return products
+    
