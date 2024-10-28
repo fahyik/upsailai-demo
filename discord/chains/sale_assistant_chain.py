@@ -1,12 +1,12 @@
 # app/chains/sale_assistant_chain.py
 
+from chains.models.suggestions import ProductSuggestions
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
 
-from chains.models.suggestions import ProductSuggestions
 
-
-def build_sale_assistant_chain(llm):
+def build_sale_assistant_chain(llm: ChatOpenAI):
     output_parser = JsonOutputParser(pydantic_object=ProductSuggestions)
     template = """
     You are a sales assistant for Vanessa-Bruno.

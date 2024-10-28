@@ -89,3 +89,8 @@ Makefile.local
 # Ignore Python compiled files and caches
 __pycache__/
 *.pyc
+
+*.sqlite3
+doc_store/
+chroma_db/
+models/

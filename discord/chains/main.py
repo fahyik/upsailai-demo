@@ -1,6 +1,6 @@
 # import base64
 # import json
-# import os
+import os
 
 # from langchain_openai import ChatOpenAI
 
@@ -8,8 +8,24 @@
 
 # os.environ["OPENAI_API_KEY"] = "sk-proj-bPZqEs92C38iN9sUNTWBT3BlbkFJARac9Feph9oJlZLe4JUt"
 
+import json
 
-# if __name__ == "__main__":
+from chains.chain_manager import ChainManager
+
+if __name__ == "__main__":
+
+    manager = ChainManager(
+        persist_directory="/Users/fahyik/Dev/upsailai-demo/chroma_db",
+        docstore_path="/Users/fahyik/Dev/upsailai-demo/doc_store",
+        openai_token=os.environ["OPENAI_API_KEY"],
+    )
+
+    docs = manager.retriever.invoke("blue boots")
+
+    product = json.loads(docs[0].page_content)
+
+    print(json.dumps(product, indent=2))
+
 #     llm_4o = ChatOpenAI(model="gpt-4o")
 #     stylist_chain = build_stylist_chain(llm_4o)
 #     retriever = load_retriever(
@@ -37,4 +53,3 @@
 #     #     "sk-proj-bPZqEs92C38iN9sUNTWBT3BlbkFJARac9Feph9oJlZLe4JUt",
 #     # )
 #     # print(rag.invoke("White high-waisted trousers with a straight cut for a clean contrast"))
-
