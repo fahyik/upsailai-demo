@@ -1,4 +1,4 @@
-import os
+from app.core.config import settings
 import json
 from chains.chain_manager import ChainManager
 from langchain_openai import ChatOpenAI
@@ -7,7 +7,7 @@ from langchain_core.messages.ai import AIMessageChunk
 manager = ChainManager(
     persist_directory="/Users/fahyik/Dev/upsailai-demo/chroma_db",
     docstore_path="/Users/fahyik/Dev/upsailai-demo/doc_store",
-    openai_token=os.environ["OPENAI_API_KEY"],
+    openai_token=settings["OPENAI_API_KEY"],
 )
 
 
@@ -37,7 +37,7 @@ async def get_stream(query):
 
     print(query)
 
-    events = manager.stylist_chain_with_image.astream_events(query, version="v2")
+    events = manager.stylist_chain_without_image.astream_events(query, version="v2")
 
     async for event in events:
 
@@ -45,7 +45,9 @@ async def get_stream(query):
 
         if event["event"] == "on_chat_model_stream":
 
-            message = (
-                f"data: {json.dumps({'content': event['data']['chunk'].content})}\n\n"
-            )
+            message = f"0:\"{event['data']['chunk'].content}\"\n"
+
+            # message = (
+            #     f"data: {json.dumps({'text': event['data']['chunk'].content})}\n\n"
+            # )
             yield message.encode("utf-8")  # Encode as bytes for StreamingResponse

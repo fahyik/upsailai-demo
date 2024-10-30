@@ -1,13 +1,7 @@
-from pydantic import BaseSettings
+from dotenv import load_dotenv
 
+load_dotenv()
 
-class Settings(BaseSettings):
-    APP_NAME: str = "FastAPI Server"
-    ENVIRONMENT: str = "development"
-    LOG_LEVEL: str = "info"
+import os
 
-    class Config:
-        env_file = ".env"
-
-
-settings = Settings()
+settings = {**os.environ}
