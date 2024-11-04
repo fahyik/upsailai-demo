@@ -25,3 +25,4 @@ python-dotenv>=1.0.0
 httpx>=0.25.0
 python-jose[cryptography]>=3.3.0
 logging>=0.4.9.6
+langgraph==0.2.41

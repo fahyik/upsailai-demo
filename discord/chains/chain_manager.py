@@ -12,8 +12,8 @@ class ChainManager:
         os.environ["OPENAI_API_KEY"] = openai_token
 
         self.retriever = load_retriever(persist_directory, docstore_path)
-        self.llm_4o_mini = ChatOpenAI(model="gpt-4o-mini", streaming=True)
-        self.llm_4o = ChatOpenAI(model="gpt-4o", streaming=True)
+        self.llm_4o_mini = ChatOpenAI(model="gpt-4o-mini")
+        self.llm_4o = ChatOpenAI(model="gpt-4o")
 
         self.stylist_chain_with_image = build_stylist_chain(
             self.llm_4o, with_image=True
@@ -35,9 +35,10 @@ class ChainManager:
                 retrieved_products[product["url"]] = {
                     "name": product["title"],
                     "description": product["description"],
-                    "image_base64": product["image_encodings"][-1],
+                    # "image_base64": product["image_encodings"][-1],
                     "product_url": product["url"],
                     "category": product["category"],
+                    "image_url": product["image_urls"][0],
                 }
                 retrieved_docs[product["url"]] = doc
         return retrieved_products, retrieved_docs
@@ -45,7 +46,7 @@ class ChainManager:
     def build_question(self, style_suggestions, user_query):
         clothes_suggestions = "\n".join(style_suggestions["clothes"])
         question = f"""
-        A customer is seeking a product recommendation for {style_suggestions['user_clothes']} with the following requirement: {user_query}.
+        A customer is seeking a product recommendation with the following requirement: {user_query}.
         The stylist suggests:
         {style_suggestions['description']}
         Clothing suggestions:
@@ -66,3 +67,7 @@ class ChainManager:
                 retrieved_product["product_url"]
             ] = retrieved_product
         return products
+
+
+#  first call -> go to chat gpt and ask for
+# for {style_suggestions['user_clothes']}
