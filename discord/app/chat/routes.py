@@ -61,11 +61,16 @@ async def chat(request: Request, body: ChatRequest):
 async def chatProductRecommendations(request: Request):
     b = await request.json()
 
+    print(b)
+
     return JSONResponse(
         content={
             "success": True,
             "data": await get_recommended_products(
-                b["clothesDescriptions"], b["stylistExplanation"], b["userQuery"]
+                b["clothesDescriptions"],
+                b["stylistExplanation"],
+                b["userClothes"],
+                b["userQuery"],
             ),
         }
     )

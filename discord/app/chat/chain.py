@@ -71,7 +71,7 @@ async def get_stream(query):
 
 
 async def get_recommended_products(
-    clothes_descriptions, stylist_explanation, user_query
+    clothes_descriptions, stylist_explanation, user_clothes, user_query
 ):
 
     try:
@@ -80,7 +80,11 @@ async def get_recommended_products(
         )
 
         question = manager.build_question(
-            {"clothes": clothes_descriptions, "description": stylist_explanation},
+            {
+                "clothes": clothes_descriptions,
+                "description": stylist_explanation,
+                "user_clothes": user_clothes,
+            },
             user_query,
         )
 
