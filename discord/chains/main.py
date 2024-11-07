@@ -15,8 +15,8 @@ from chains.chain_manager import ChainManager
 if __name__ == "__main__":
 
     manager = ChainManager(
-        persist_directory="/Users/fahyik/Dev/upsailai-demo/chroma_db",
-        docstore_path="/Users/fahyik/Dev/upsailai-demo/doc_store",
+        persist_directory=os.environ["DB_PATH"],
+        docstore_path=os.environ["DOC_STORE_PATH"],
         openai_token=os.environ["OPENAI_API_KEY"],
     )
 

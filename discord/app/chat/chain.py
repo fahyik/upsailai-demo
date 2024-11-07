@@ -8,8 +8,8 @@ from langchain_core.messages.ai import AIMessageChunk
 from langgraph.prebuilt import ToolNode, tools_condition
 
 manager = ChainManager(
-    persist_directory="/Users/fahyik/Dev/upsailai-demo/chroma_db",
-    docstore_path="/Users/fahyik/Dev/upsailai-demo/doc_store",
+    persist_directory=settings["DB_PATH"],
+    docstore_path=settings["DOC_STORE_PATH"],
     openai_token=settings["OPENAI_API_KEY"],
 )
 
