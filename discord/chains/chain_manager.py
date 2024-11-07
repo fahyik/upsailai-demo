@@ -46,7 +46,7 @@ class ChainManager:
     def build_question(self, style_suggestions, user_query):
         clothes_suggestions = "\n".join(style_suggestions["clothes"])
         question = f"""
-        A customer is seeking a product recommendation for {style_suggestions['user_clothes']}  with the following requirement: {user_query}.
+        A customer is seeking a product recommendation with the following requirement: {user_query}.
         The stylist suggests:
         {style_suggestions['description']}
         Clothing suggestions:
