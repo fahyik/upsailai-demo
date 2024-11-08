@@ -44,12 +44,15 @@ class ChainManager:
         return retrieved_products, retrieved_docs
 
     def build_question(self, style_suggestions, customer_query):
-        clothes_suggestions = ", ".join(style_suggestions["recommended_products"])
+
         question = f"""
         A customer is looking for {customer_query}
          
         Customer's clothing or style: 
         {style_suggestions['customer_style']}
+
+        Stylist's opinion:
+        {style_suggestions['stylist_opinion']}
 
         Stylist's advice:
         {style_suggestions['stylist_explanation']}

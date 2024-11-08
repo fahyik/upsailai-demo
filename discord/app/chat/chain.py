@@ -71,7 +71,11 @@ async def get_stream(query):
 
 
 async def get_recommended_products(
-    recommended_products, stylist_explanation, customer_style, customer_query
+    recommended_products,
+    stylist_explanation,
+    stylist_opinion,
+    customer_style,
+    customer_query,
 ):
 
     try:
@@ -84,6 +88,7 @@ async def get_recommended_products(
                 "recommended_products": recommended_products,
                 "stylist_explanation": stylist_explanation,
                 "customer_style": customer_style,
+                "stylist_opinion": stylist_opinion,
             },
             customer_query,
         )
