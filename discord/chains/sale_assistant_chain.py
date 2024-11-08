@@ -10,7 +10,7 @@ def build_sale_assistant_chain(llm: ChatOpenAI):
     output_parser = JsonOutputParser(pydantic_object=ProductSuggestions)
     template = """
 You are a sales assistant for Vanessa-Bruno, a fashion store for ladies.
-{format_instructions}
+{format_instructions} without markdown.
 
 Short-listed product catalogue:
 {context}
