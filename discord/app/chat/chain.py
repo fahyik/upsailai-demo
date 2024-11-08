@@ -71,22 +71,24 @@ async def get_stream(query):
 
 
 async def get_recommended_products(
-    clothes_descriptions, stylist_explanation, user_clothes, user_query
+    recommended_products, stylist_explanation, customer_style, customer_query
 ):
 
     try:
         retrieved_products, retrieved_docs = manager.retrieve_products(
-            clothes_descriptions
+            recommended_products
         )
 
         question = manager.build_question(
             {
-                "clothes": clothes_descriptions,
-                "description": stylist_explanation,
-                "user_clothes": user_clothes,
+                "recommended_products": recommended_products,
+                "stylist_explanation": stylist_explanation,
+                "customer_style": customer_style,
             },
-            user_query,
+            customer_query,
         )
+
+        print(question)
 
         recommend_products = manager.sale_assistant_chain.invoke(
             {

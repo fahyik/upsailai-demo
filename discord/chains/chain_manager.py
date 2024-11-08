@@ -13,7 +13,7 @@ class ChainManager:
 
         self.retriever = load_retriever(persist_directory, docstore_path)
         self.llm_4o_mini = ChatOpenAI(model="gpt-4o-mini")
-        self.llm_4o = ChatOpenAI(model="gpt-4o")
+        self.llm_4o = ChatOpenAI(model="gpt-4o", temperature=1.0)
 
         self.stylist_chain_with_image = build_stylist_chain(
             self.llm_4o, with_image=True
@@ -43,15 +43,16 @@ class ChainManager:
                 retrieved_docs[product["url"]] = doc
         return retrieved_products, retrieved_docs
 
-    def build_question(self, style_suggestions, user_query):
-        clothes_suggestions = "\n".join(style_suggestions["clothes"])
+    def build_question(self, style_suggestions, customer_query):
+        clothes_suggestions = ", ".join(style_suggestions["recommended_products"])
         question = f"""
-        A customer is seeking a product recommendation with the following requirement: {user_query}.
-        The stylist suggests:
-        {style_suggestions['description']}
-        Clothing suggestions:
-        {clothes_suggestions}
-        Please provide the best product recommendation to the customer, considering their requirements and the stylist's suggestions.
+        A customer is looking for {customer_query}
+         
+        Customer's clothing or style: 
+        {style_suggestions['customer_style']}
+
+        Stylist's advice:
+        {style_suggestions['stylist_explanation']}
         """
         return question
 

@@ -67,10 +67,10 @@ async def chatProductRecommendations(request: Request):
         content={
             "success": True,
             "data": await get_recommended_products(
-                b["clothesDescriptions"],
+                b["recommendedProducts"],
                 b["stylistExplanation"],
-                b["userClothes"],
-                b["userQuery"],
+                b["customerStyle"],
+                b["customerQuery"],
             ),
         }
     )
