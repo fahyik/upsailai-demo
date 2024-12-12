@@ -1,0 +1,377 @@
+digraph G {
+concentrate=true;
+splines="ortho";
+rankdir="LR";
+subgraph legend{
+    rank = min;
+    label = "legend";
+    Legend [shape=none, margin=0, label = <
+        <table cellspacing="0" cellpadding="0" border="1"><tr><td>Code2flow Legend</td></tr><tr><td>
+        <table cellspacing="0">
+        <tr><td>Regular function</td><td width="50px" bgcolor='#cccccc'></td></tr>
+        <tr><td>Trunk function (nothing calls this)</td><td bgcolor='#966F33'></td></tr>
+        <tr><td>Leaf function (this calls nothing else)</td><td bgcolor='#6db33f'></td></tr>
+        <tr><td>Function call</td><td><font color='black'>&#8594;</font></td></tr>
+        </table></td></tr></table>
+        >];
+}node_4c06689f [label="38: display_products()" name="base_handler::BaseHandler.display_products" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_d3a638b3 [label="11: process_message()" name="base_handler::BaseHandler.process_message" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_0ed4247c [label="14: __init__()" name="bot::TomoBot.__init__" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_c172fead [label="33: on_ready()" name="bot::TomoBot.on_ready" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_8cc18647 [label="0: (global)()" name="chain::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_cd12307b [label="35: default()" name="chain::CustomEncoder.default" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_4bd6439a [label="73: get_recommended_products()" name="chain::get_recommended_products" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_9b57943c [label="41: get_stream()" name="chain::get_stream" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_808754a2 [label="11: __init__()" name="chain_manager::ChainManager.__init__" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_3dcf8761 [label="46: build_question()" name="chain_manager::ChainManager.build_question" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_b78b2a71 [label="62: organize_products()" name="chain_manager::ChainManager.organize_products" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_edcec4c1 [label="26: retrieve_products()" name="chain_manager::ChainManager.retrieve_products" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_e7ab12a3 [label="4: __init__()" name="command::TomoCommand.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_a4a5634a [label="0: (global)()" name="convert::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_58a978e6 [label="162: main()" name="convert::main" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_e8075985 [label="10: __init__()" name="embeddings::CLIPEmbeddings.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_619d4ba4 [label="22: embed_document()" name="embeddings::CLIPEmbeddings.embed_document" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_781712c8 [label="16: embed_documents()" name="embeddings::CLIPEmbeddings.embed_documents" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_413ac61c [label="39: embed_image()" name="embeddings::CLIPEmbeddings.embed_image" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_dd61019e [label="19: embed_query()" name="embeddings::CLIPEmbeddings.embed_query" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_4c4ecc66 [label="25: embed_text()" name="embeddings::CLIPEmbeddings.embed_text" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_8d9b2be5 [label="6: format_docs()" name="formatter::format_docs" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_a736cbd1 [label="29: do_GET()" name="healthcheck::HealthCheckHandler.do_GET" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_56190ece [label="10: __init__()" name="healthcheck::_ClientContext.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_c79cf89c [label="14: health_status()" name="healthcheck::_ClientContext.health_status" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_66d39874 [label="46: start_http_health_check()" name="healthcheck::start_http_health_check" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_3350f63c [label="6: handle()" name="image_handler::ImageMessageHandler.handle" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_fc683791 [label="5: setup_logging()" name="logging::setup_logging" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_bf5684ad [label="0: (global)()" name="main::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_bb9e9676 [label="0: (global)()" name="main::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_b2bac1aa [label="0: (global)()" name="main::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_d0a8ae41 [label="0: (global)()" name="quantize::(global)" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_4c092a1d [label="116: get_operators()" name="quantize::get_operators" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_1decfa09 [label="339: main()" name="quantize::main" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_5d346d14 [label="233: quantize()" name="quantize::quantize" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_f03652be [label="213: quantize_bnb4()" name="quantize::quantize_bnb4" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_85d985e0 [label="167: quantize_fp16()" name="quantize::quantize_fp16" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_a1967410 [label="190: quantize_q4()" name="quantize::quantize_q4" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_f2988b1c [label="130: quantize_q8()" name="quantize::quantize_q8" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_7664edfa [label="12: load_retriever()" name="retriever::load_retriever" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_ef54750a [label="33: chat()" name="routes::chat" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_efe3e0b6 [label="61: chatProductRecommendations()" name="routes::chatProductRecommendations" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_226247ee [label="9: build_sale_assistant_chain()" name="sale_assistant_chain::build_sale_assistant_chain" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_cdd36978 [label="19: _split_document()" name="splitter::ProductDocumentSplitter._split_document" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_754a340d [label="63: split_documents()" name="splitter::ProductDocumentSplitter.split_documents" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_1f874989 [label="13: update_metadata()" name="splitter::ProductDocumentSplitter.update_metadata" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_192a0c68 [label="8: build_stylist_chain()" name="stylist_chain::build_stylist_chain" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_bad04415 [label="4: handle()" name="text_handler::TextMessageHandler.handle" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_6f1b2014 [label="1: product_to_string()" name="util::product_to_string" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_f08b9b00 [label="44: add_base64_images()" name="vectorstore::MultiModalChroma.add_base64_images" shape="rect" style="rounded,filled" fillcolor="#cccccc" ];
+node_e51811df [label="10: add_documents()" name="vectorstore::MultiModalChroma.add_documents" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_e12baec3 [label="9: __init__()" name="views::Carousel.__init__" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_d50cc3cf [label="49: next()" name="views::Carousel.next" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_c185e7c0 [label="41: previous()" name="views::Carousel.previous" shape="rect" style="rounded,filled" fillcolor="#966F33" ];
+node_b1386d1d [label="16: update_embed()" name="views::Carousel.update_embed" shape="rect" style="rounded,filled" fillcolor="#6db33f" ];
+node_4c06689f -> node_e12baec3 [color="#CC79A7" penwidth="2"];
+node_4c06689f -> node_b1386d1d [color="#CC79A7" penwidth="2"];
+node_d3a638b3 -> node_4c06689f [color="#009E73" penwidth="2"];
+node_d3a638b3 -> node_3dcf8761 [color="#009E73" penwidth="2"];
+node_d3a638b3 -> node_b78b2a71 [color="#009E73" penwidth="2"];
+node_d3a638b3 -> node_edcec4c1 [color="#009E73" penwidth="2"];
+node_d3a638b3 -> node_8d9b2be5 [color="#009E73" penwidth="2"];
+node_0ed4247c -> node_808754a2 [color="#F0E442" penwidth="2"];
+node_0ed4247c -> node_e7ab12a3 [color="#F0E442" penwidth="2"];
+node_c172fead -> node_66d39874 [color="#0072B2" penwidth="2"];
+node_8cc18647 -> node_808754a2 [color="#CC79A7" penwidth="2"];
+node_cd12307b -> node_cd12307b [color="#009E73" penwidth="2"];
+node_4bd6439a -> node_3dcf8761 [color="#56B4E9" penwidth="2"];
+node_4bd6439a -> node_b78b2a71 [color="#56B4E9" penwidth="2"];
+node_4bd6439a -> node_edcec4c1 [color="#56B4E9" penwidth="2"];
+node_4bd6439a -> node_8d9b2be5 [color="#56B4E9" penwidth="2"];
+node_808754a2 -> node_7664edfa [color="#56B4E9" penwidth="2"];
+node_808754a2 -> node_226247ee [color="#56B4E9" penwidth="2"];
+node_808754a2 -> node_192a0c68 [color="#56B4E9" penwidth="2"];
+node_808754a2 -> node_192a0c68 [color="#56B4E9" penwidth="2"];
+node_a4a5634a -> node_58a978e6 [color="#56B4E9" penwidth="2"];
+node_58a978e6 -> node_5d346d14 [color="#D55E00" penwidth="2"];
+node_619d4ba4 -> node_4c4ecc66 [color="#F0E442" penwidth="2"];
+node_781712c8 -> node_619d4ba4 [color="#000000" penwidth="2"];
+node_dd61019e -> node_619d4ba4 [color="#D55E00" penwidth="2"];
+node_8d9b2be5 -> node_6f1b2014 [color="#0072B2" penwidth="2"];
+node_a736cbd1 -> node_c79cf89c [color="#E69F00" penwidth="2"];
+node_66d39874 -> node_56190ece [color="#F0E442" penwidth="2"];
+node_3350f63c -> node_d3a638b3 [color="#F0E442" penwidth="2"];
+node_b2bac1aa -> node_fc683791 [color="#56B4E9" penwidth="2"];
+node_bf5684ad -> node_0ed4247c [color="#0072B2" penwidth="2"];
+node_bb9e9676 -> node_808754a2 [color="#D55E00" penwidth="2"];
+node_d0a8ae41 -> node_1decfa09 [color="#E69F00" penwidth="2"];
+node_1decfa09 -> node_5d346d14 [color="#E69F00" penwidth="2"];
+node_5d346d14 -> node_4c092a1d [color="#F0E442" penwidth="2"];
+node_5d346d14 -> node_f03652be [color="#F0E442" penwidth="2"];
+node_5d346d14 -> node_85d985e0 [color="#F0E442" penwidth="2"];
+node_5d346d14 -> node_85d985e0 [color="#F0E442" penwidth="2"];
+node_5d346d14 -> node_a1967410 [color="#F0E442" penwidth="2"];
+node_5d346d14 -> node_f2988b1c [color="#F0E442" penwidth="2"];
+node_7664edfa -> node_e8075985 [color="#56B4E9" penwidth="2"];
+node_ef54750a -> node_9b57943c [color="#56B4E9" penwidth="2"];
+node_efe3e0b6 -> node_4bd6439a [color="#D55E00" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_cdd36978 -> node_1f874989 [color="#000000" penwidth="2"];
+node_754a340d -> node_cdd36978 [color="#0072B2" penwidth="2"];
+node_bad04415 -> node_d3a638b3 [color="#0072B2" penwidth="2"];
+node_f08b9b00 -> node_413ac61c [color="#000000" penwidth="2"];
+node_e51811df -> node_f08b9b00 [color="#CC79A7" penwidth="2"];
+node_d50cc3cf -> node_b1386d1d [color="#CC79A7" penwidth="2"];
+node_c185e7c0 -> node_b1386d1d [color="#000000" penwidth="2"];
+subgraph cluster_82739b39 {
+    label="File: base_handler";
+    name="base_handler";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_3835b472 {
+        node_d3a638b3 node_4c06689f;
+        label="Class: BaseHandler";
+        name="BaseHandler";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_f9ac173f {
+    label="File: bot";
+    name="bot";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_d95a3e0f {
+        node_0ed4247c node_c172fead;
+        label="Class: TomoBot";
+        name="TomoBot";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_59e6e0dd {
+    node_9b57943c node_4bd6439a node_8cc18647;
+    label="File: chain";
+    name="chain";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_f9b9af92 {
+        node_cd12307b;
+        label="Class: CustomEncoder";
+        name="CustomEncoder";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_e46ff620 {
+    label="File: chain_manager";
+    name="chain_manager";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_75a66843 {
+        node_808754a2 node_edcec4c1 node_3dcf8761 node_b78b2a71;
+        label="Class: ChainManager";
+        name="ChainManager";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_a1661dd2 {
+    label="File: command";
+    name="command";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_ebda9439 {
+        node_e7ab12a3;
+        label="Class: TomoCommand";
+        name="TomoCommand";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_1de68d24 {
+    node_58a978e6 node_a4a5634a;
+    label="File: convert";
+    name="convert";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_21c5cb33 {
+    label="File: embeddings";
+    name="embeddings";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_35542a3c {
+        node_e8075985 node_781712c8 node_dd61019e node_619d4ba4 node_4c4ecc66 node_413ac61c;
+        label="Class: CLIPEmbeddings";
+        name="CLIPEmbeddings";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_3ceabe7d {
+    node_8d9b2be5;
+    label="File: formatter";
+    name="formatter";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_2a241e47 {
+    node_66d39874;
+    label="File: healthcheck";
+    name="healthcheck";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_93c45550 {
+        node_56190ece node_c79cf89c;
+        label="Class: _ClientContext";
+        name="_ClientContext";
+        style="filled";
+        graph[style=dotted];
+    };
+    subgraph cluster_a80f1f00 {
+        node_a736cbd1;
+        label="Class: HealthCheckHandler";
+        name="HealthCheckHandler";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_9afca652 {
+    label="File: image_handler";
+    name="image_handler";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_62ce5277 {
+        node_3350f63c;
+        label="Class: ImageMessageHandler";
+        name="ImageMessageHandler";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_b7ef5a4e {
+    node_fc683791;
+    label="File: logging";
+    name="logging";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_54257f3c {
+    node_b2bac1aa;
+    label="File: main";
+    name="main";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_630f98fd {
+    node_bf5684ad;
+    label="File: main";
+    name="main";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_78dbead9 {
+    node_bb9e9676;
+    label="File: main";
+    name="main";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_014ac1f9 {
+    node_4c092a1d node_f2988b1c node_85d985e0 node_a1967410 node_f03652be node_5d346d14 node_1decfa09 node_d0a8ae41;
+    label="File: quantize";
+    name="quantize";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_25562d7c {
+    node_7664edfa;
+    label="File: retriever";
+    name="retriever";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_6941a626 {
+    node_ef54750a node_efe3e0b6;
+    label="File: routes";
+    name="routes";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_592da287 {
+    node_226247ee;
+    label="File: sale_assistant_chain";
+    name="sale_assistant_chain";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_337c4efb {
+    label="File: splitter";
+    name="splitter";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_2aecf16d {
+        node_1f874989 node_cdd36978 node_754a340d;
+        label="Class: ProductDocumentSplitter";
+        name="ProductDocumentSplitter";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_c403b6a4 {
+    node_192a0c68;
+    label="File: stylist_chain";
+    name="stylist_chain";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_c0162df1 {
+    label="File: text_handler";
+    name="text_handler";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_0b1ef717 {
+        node_bad04415;
+        label="Class: TextMessageHandler";
+        name="TextMessageHandler";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_fcb486aa {
+    node_6f1b2014;
+    label="File: util";
+    name="util";
+    style="filled";
+    graph[style=dotted];
+};
+subgraph cluster_74b91f21 {
+    label="File: vectorstore";
+    name="vectorstore";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_9b66b8eb {
+        node_e51811df node_f08b9b00;
+        label="Class: MultiModalChroma";
+        name="MultiModalChroma";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+subgraph cluster_b17c2bdf {
+    label="File: views";
+    name="views";
+    style="filled";
+    graph[style=dotted];
+    subgraph cluster_7d97a12d {
+        node_e12baec3 node_b1386d1d node_c185e7c0 node_d50cc3cf;
+        label="Class: Carousel";
+        name="Carousel";
+        style="filled";
+        graph[style=dotted];
+    };
+};
+}
