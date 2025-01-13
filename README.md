@@ -1,3 +1,4 @@
+```
 ├── Dockerfile  
 ├── Makefile  
 ├── app   
@@ -49,8 +50,9 @@
 │       └── util.py
 ├── requirements.txt
 └── wsgi.py
+```
 
-retriever.py: # Ce fichier définit une fonction load_retriever qui configure et retourne un ParentDocumentRetriever utilisant un MultiModalChroma pour la vectorisation des documents, un ProductDocumentSplitter pour la division des documents, et un LocalFileStore pour le stockage local des documents.
+**retriever.py**: # Ce fichier définit une fonction load_retriever qui configure et retourne un ParentDocumentRetriever utilisant un MultiModalChroma pour la vectorisation des documents, un ProductDocumentSplitter pour la division des documents, et un LocalFileStore pour le stockage local des documents.
 
 splitter.py
 Keyword: ProductDocumentSplitter
