@@ -51,24 +51,26 @@
 ├── requirements.txt
 └── wsgi.py
 ```
-
-**main.py**
+---
+**main.py**  
 **Keyword**: FastAPI Application
 
 **Description**: Ce fichier configure et lance une application FastAPI avec des routes pour le chat, une configuration de middleware CORS, et un point de terminaison de vérification de l'état (/ready).
+
 ---
-**routes.py**
+**routes.py**  
 **Keyword**: Chat API Routes
 
 **Description**: Ce fichier définit les routes API pour le chat, y compris les points de terminaison pour envoyer des messages et obtenir des recommandations de produits, en utilisant FastAPI.
----
-**chain.py**
+
+---  
+**chain.py**  
 **Keyword**: ChainManager
 
 **Description**: Ce fichier configure un ChainManager pour gérer les chaînes de traitement, y compris la récupération de produits recommandés et le streaming de réponses, en utilisant des modèles de langage et des outils de journalisation.
 
 ---
-**chain_manager.py**
+**chain_manager.py**  
 **Keyword: ChainManager**
 
 **Description**: Ce fichier définit la classe ChainManager qui gère les différentes chaînes de traitement, y compris la récupération de produits, la génération de questions, et l'organisation des produits recommandés, en utilisant des modèles de langage et des outils de stockage de documents.
