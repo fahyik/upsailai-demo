@@ -11,7 +11,7 @@
 │   ├── core
 │   │   ├── __init__.py
 │   │   └── config.py
-│   ├── main.py
+│   ├── main.py                     # FastAPI Application
 │   ├── routes.py
 │   └── utils
 │       ├── __init__.py
@@ -51,6 +51,16 @@
 ├── requirements.txt
 └── wsgi.py
 ```
+
+**main.py**
+**Keyword**: FastAPI Application
+
+**Description**: Ce fichier configure et lance une application FastAPI avec des routes pour le chat, une configuration de middleware CORS, et un point de terminaison de vérification de l'état (/ready).
+
+**routes.py**
+**Keyword**: Chat API Routes
+
+**Description**: Ce fichier définit les routes API pour le chat, y compris les points de terminaison pour envoyer des messages et obtenir des recommandations de produits, en utilisant FastAPI.
 
 **retriever.py**: # Ce fichier définit une fonction load_retriever qui configure et retourne un ParentDocumentRetriever utilisant un MultiModalChroma pour la vectorisation des documents, un ProductDocumentSplitter pour la division des documents, et un LocalFileStore pour le stockage local des documents.
 
